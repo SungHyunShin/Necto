@@ -1,0 +1,194 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <title>necto</title>
+  <!-- <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint"> -->
+</head>
+
+
+<body class = "bg-light">
+  <!-- <script src="js/scripts.js"></script> -->
+  <!-- Image and text -->
+  <nav class="navbar fixed-top w3-brown">
+    <div class ="mx-auto">
+      <a class="navbar-brand navbar-light titlefont" href="#">
+        <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        necto
+      </a>
+    </div>
+    <button type="button" class="btn btn-outline-warning">Log In</button>
+    <button type="button" class="btn btn-outline-warning">Sign Up</button>
+  </nav>
+
+<!-- wonseok -->
+
+<div class = "wraptags fixed-top">
+  <div class = "tag">
+    <div class = "tagtext">ALL</div>
+  </div>
+
+  <div class = "tag">
+      <div class = "tagtext">Academics</div>
+  </div>
+
+  <div class = "tag">
+      <div class = "tagtext">Faith</div>
+  </div>
+
+  <div class = "tag">
+      <div class = "tagtext">Food</div>
+  </div>
+
+  <div class = "tag">
+      <div class = "tagtext">Sports</div>
+  </div>
+
+  <div class = "tag">
+      <div class = "tagtext">Travel</div>
+  </div>
+</div>
+
+
+<script>
+$(".tag").on("click", function(){
+  $(this).toggleClass('active');
+});
+</script>
+
+
+
+
+
+
+<!--- wonseok end -->
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="cardstack">
+
+
+    <div class = "card shadow-sm">
+      <div class = "cardEvent bg-primary text-left">
+        <div class= "cardDate h4 small">
+          April 2, 2019
+        </div>
+        <div class = "h3">
+          GenChem Study Session
+        </div>
+        <div class = "cardDescrp"><small>
+          Maecenas eu tincidunt lacus. Vivamus vitae lacus congue, aliquet quam ac, dapibus turpis. Donec dictum purus lorem, in fermentum sem imperdiet sed. Praesent at efficitur tellus.
+        </small>
+      </div><br>
+        <span class = "cardAction" style="font-size: 2em; color: white;">
+          <i class="far fa-map"></i>
+        </span>
+        <!-- <div class= "cardLocation">
+          Hesburgh Library
+        </div> -->
+        <DIV style="position: absolute; top:160px; left:60px; width:200px; height:25px">Hesburgh Library</DIV>
+
+        <button type="button" class="btn btn-light cardButton" style="float:right;">Join In</button>
+        <button type="button" class="btn btn-light cardButton" style="float:right;">View</button>
+      </div>
+      <div class = "cardStat">
+        <div class = "info h1">
+          4 <br> 15
+        </div>
+      </div>
+    </div>
+
+    <div class = "card shadow-sm">
+      <div class = "cardEvent bg-dark text-left">
+        <div class= "cardDate h4 small">
+          April 1, 2019
+        </div>
+        <div class = "h3">
+          Uber to Chicago
+        </div>
+        <div class = "cardDescrp"><small>
+          Maecenas eu tincidunt lacus. Vivamus vitae lacus congue, aliquet quam ac, dapibus turpis. Donec dictum purus lorem, in fermentum sem imperdiet sed. Praesent at efficitur tellus.
+        </small>
+      </div><br>
+        <span class = "cardAction" style="font-size: 2em; color: white;">
+          <i class="far fa-map"></i>
+        </span>
+        <button type="button" class="btn btn-light" style="float:right;">Join In</button>
+      </div>
+    </div>
+
+
+    <div class = "card shadow-sm">
+      <div class = "cardEvent bg-info text-left">
+        <div class= "cardDate h4 small">
+          April 1, 2019
+        </div>
+        <div class = "h3">
+          Bible Study
+        </div>
+        <div class = "cardDescrp"><small>
+          Maecenas eu tincidunt lacus. Vivamus vitae lacus congue, aliquet quam ac, dapibus turpis. Donec dictum purus lorem, in fermentum sem imperdiet sed. Praesent at efficitur tellus.
+        </small>
+      </div><br>
+        <span class = "cardAction" style="font-size: 2em; color: white;">
+          <i class="far fa-map"></i>
+        </span>
+        <button type="button" class="btn btn-light" style="float:right;">Join In</button>
+      </div>
+    </div>
+
+
+    <div class = "card shadow-sm">
+      <div class = "cardEvent bg-success text-left">
+        <div class= "cardDate h4 small">
+          April 2, 2019
+        </div>
+        <div class = "h3">
+          Basketball Pickup
+        </div>
+        <div class = "cardDescrp"><small>
+          Maecenas eu tincidunt lacus. Vivamus vitae lacus congue, aliquet quam ac, dapibus turpis. Donec dictum purus lorem, in fermentum sem imperdiet sed. Praesent at efficitur tellus.
+        </small>
+      </div><br>
+        <span class = "cardAction" style="font-size: 2em; color: white;">
+          <i class="far fa-map"></i>
+        </span>
+        <button type="button" class="btn btn-light" style="float:right;">Join In</button>
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+  </div>
+
+
+
+
+
+  <button type="button" class="btn btn-primary btn-circle glyphicon glyphicon-plus shadow-lg"><i class="fa fa-plus"></i></button>
+
+</body>
+</html>
