@@ -1,3 +1,4 @@
+import os
 # Class for list of events
 class eventList:
     # private variables
@@ -6,6 +7,12 @@ class eventList:
     def __init__(self):
         _eIDC = 0
         _eList = []
+    def writeEventInfo(self):
+        f = open('backend/events.txt',"w")
+        eventID,name,location,population,tags,ownerName,description,members
+        f.write(self._eIDC)
+        for event in self._eList:
+            f.write(event.get_eventID()+'/'+event.get_location()+'/'+event.get_population()[0]+','+event.get_population()[1]+'/'+','.join(event.get_tags())+'/'+event.get_ownerName()+'/'+event.get_description()+'/'+",".join(event.get_members()))
     # returns entire movie list in json format
     def jsonList(self):
         jsonL = []

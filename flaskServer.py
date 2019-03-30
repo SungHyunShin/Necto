@@ -8,7 +8,6 @@ server = Flask(__name__)
 userL = userList()
 eventL = eventList()
 
-
 uFile = os.path.isfile('backend/users.txt')
 eFile = os.path.isfile('backend/events.txt')
 if uFile:
@@ -23,9 +22,8 @@ if eFile:
     pass
     f = open('backend/events.txt',"r")
     lines = f.readlines()
-    for line in lines[2:]:
+    for line in lines[1:]:
         line = line.split("/")
-        print(line)
         population = line[3].split(',')
         tags = line[4].split(',')
         members = line[7].split(',')
@@ -38,15 +36,18 @@ def test():
     return "Usage: https://github.com/SungHyunShin/Necto/blob/master/backend/README.md"
 
 # users
-@server.route('/users',methods=['GET'])
-def check_users():
-    return jsonify({'response':200,'message':'OK','users':userL.returnNames()})
+
+# ONLY ENABLED FOR DEVELOPER TESTING
+#@server.route('/users',methods=['GET'])
+#def check_users():
+#    return jsonify({'response':200,'message':'OK','users':userL.returnNames()})
 
 @server.route('/users',methods=['POST'])
 def add_user():
     if not request.json or not 'username' in request.json or not 'password' in request.json:
         return jsonify({'response':400,'message':'missing parameters'})
     if userL.addUser(request.json['username'],request.json['password']):
+        userL.writeUserInfo()
         return jsonify({'response':200,'message':'OK','username':request.json['username']})
     return jsonify({'response':400,'message':'username exists'})
 
@@ -66,10 +67,12 @@ def update(username):
         return jsonify({'response':400,'message':'missing parameters'})
     if 'newPW' in request.json:
         if userL.updatePassword(username,request.json['password'],request.json['newPW']):
+            userL.writeUserInfo()
             return jsonify({'response':200,'message':'OK'})
         return jsonify({'response':400,'message':'permission denied'})
     if 'newUser' in request.json:
         if userL.updateUsername(username,request.json['newUser'],request.json['password']):
+            userL.writeUserInfo()
             return jsonify({'response':200,'message':'OK'})
         return jsonify({'response':400,'message':'permission denied'})
 
@@ -78,6 +81,7 @@ def remove_user(username):
     if not request.json or not 'password' in request.json:
         return jsonify({'response':400,'message':'missing parameters'})
     if userL.removeUser(username,request.json['password']):
+        userL.writeUserInfo()
         return jsonify({'response':200,'message':'OK'})
     return jsonify({'response':400,'message':'permission denied'})
 
@@ -110,6 +114,7 @@ def create_event():
     returnD['message']='OK'
     eID = eventL.addEvent(request.json['name'],request.json['location'],request.json['population'],request.json['tags'],request.json['ownerName'],request.json['description'])
     returnD['eventID'] = eID
+    eventL.writeEventInfo()
     return jsonify(returnD)
 
 # DELETE /events
@@ -149,6 +154,7 @@ def update_event(eventID):
             returnD['response']= 400
             returnD['message']='didn\'t update'
         else:
+            eventL.writeEventInfo()
             returnD['response']=200
             returnD['message']='OK'
         returnD['eventID']=eventID
@@ -164,12 +170,11 @@ def remove_event(eventID):
         return jsonify({'response':400,'message':'missing parameters'})
     if eventL.checkOwner(eventID,request.json['username']) and userL.checkUserPW(eventL.getOwner(eventID),request.json['password']):
         eventL.deleteEvent(eventID)
+        eventL.writeEventInfo()
         return jsonify({'response':200,'message':'OK'})
     else:
         return jsonify({'response':400,'message':'Permission denied'})
 
 # main run server
-if __name__ == '__main__':
-    # create classes
-
+if __name__ == '__main__': 
     server.run(debug=True)
