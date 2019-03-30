@@ -7,6 +7,7 @@ class userList:
         f = open('backend/users.txt',"w")
         for user in self._uList:
             f.write(user.get_username()+"/"+user.get_password()+"/"+",".join(user.get_events()))
+            f.write('\n')
     def returnNames(self):
         u = []
         for user in self._uList:

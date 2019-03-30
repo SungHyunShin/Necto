@@ -9,10 +9,10 @@ class eventList:
         _eList = []
     def writeEventInfo(self):
         f = open('backend/events.txt',"w")
-        eventID,name,location,population,tags,ownerName,description,members
-        f.write(self._eIDC)
+        f.write(str(self._eIDC)+'\n')
         for event in self._eList:
-            f.write(event.get_eventID()+'/'+event.get_location()+'/'+event.get_population()[0]+','+event.get_population()[1]+'/'+','.join(event.get_tags())+'/'+event.get_ownerName()+'/'+event.get_description()+'/'+",".join(event.get_members()))
+            f.write(str(event.get_eventID())+'/'+event.get_name()+'/'+event.get_location()+'/'+str(event.get_population()[0])+','+str(event.get_population()[1])+'/'+','.join(event.get_tags())+'/'+event.get_ownerName()+'/'+event.get_description()+'/'+",".join(event.get_members()))
+            f.write('\n')
     # returns entire movie list in json format
     def jsonList(self):
         jsonL = []
@@ -35,10 +35,10 @@ class eventList:
         return self._eIDC
     def addOldEvent(self,eventID,name,location,population,tags,ownerName,description,members):
         new = event()
-        new.set_eventID(eventID)
+        new.set_eventID(int(eventID))
         new.set_name(name)
         new.set_location(location)
-        new.set_population((population[0],population[1]))
+        new.set_population((int(population[0]),int(population[1])))
         new.set_tags(tags)
         new.set_description(description)
         new.set_ownerName(ownerName)

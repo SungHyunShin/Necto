@@ -14,21 +14,33 @@ if uFile:
     pass
     f = open('backend/users.txt',"r")
     lines = f.readlines()
+    f.close()
     for line in lines:
+        if line.isspace():
+            continue
         line = line.split("/")
-        events = line[2].split(",")
-        userL.addOldUser(line[0],line[1],events)
+        if len(line) < 3:
+            userL.addOldUser(line[0],line[1],[])
+        else:
+            events = line[2].split(",")
+            userL.addOldUser(line[0],line[1],events)
 if eFile:
     pass
     f = open('backend/events.txt',"r")
     lines = f.readlines()
+    f.close()
     for line in lines[1:]:
+        if line.isspace():
+            continue
         line = line.split("/")
         population = line[3].split(',')
         tags = line[4].split(',')
-        members = line[7].split(',')
-        eventL.addOldEvent(line[0],line[1],line[2],population,tags,line[5],line[6],members)
-    eventL.set_eIDC(lines[-1])
+        if len(line)<8:
+            eventL.addOldEvent(line[0],line[1],line[2],population,tags,line[5],line[6],[])
+        else:
+            members = line[7].split(',')
+            eventL.addOldEvent(line[0],line[1],line[2],population,tags,line[5],line[6],members)
+    eventL.set_eIDC(int(lines[0]))
 # listeners
 
 @server.route('/')
