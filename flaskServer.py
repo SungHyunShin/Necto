@@ -1,6 +1,6 @@
 import os
 from flask import request, Flask, jsonify
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from backend.eventClasses import eventList
 from backend.userClass import userList
 
