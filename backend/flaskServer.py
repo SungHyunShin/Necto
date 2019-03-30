@@ -5,6 +5,8 @@ from userClass import userList
 
 server = Flask(__name__)
 
+userL = userList()
+eventL = eventList()
 # listeners
 
 # users
@@ -141,6 +143,5 @@ def remove_event(eventID):
 # main run server
 if __name__ == '__main__':
     # create classes
-    userL = userList()
-    eventL = eventList()
+
     server.run(debug=True)
