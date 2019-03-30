@@ -11,7 +11,7 @@ eventL = eventList()
 
 @server.route('/')
 def test():
-    return jsonify({'response':200,'message':'OK'})
+    return "Usage: https://github.com/SungHyunShin/Necto/blob/master/backend/README.md"
 
 # users
 @server.route('/users',methods=['GET'])
