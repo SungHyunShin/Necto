@@ -13,23 +13,23 @@ uFile = os.path.isfile('backend/users.txt')
 eFile = os.path.isfile('backend/events.txt')
 if uFile:
     pass
-#    f = open('backend/users.txt',"rw+")
-#    lines = f.readlines()
-#    for line in lines:
-#        line = line.split("/")
-#        events = line[2].split(",")
-#        userL.addOldUser(line[0],line[1],events)
+    f = open('backend/users.txt',"rw+")
+    lines = f.readlines()
+    for line in lines:
+        line = line.split("/")
+        events = line[2].split(",")
+        userL.addOldUser(line[0],line[1],events)
 if eFile:
     pass
-#    f = open('backend/events.txt',"rw+")
-#    lines = f.readlines()
-#    for line in lines[1:]:
-#        line = line.split("/")
-#        population = line[3].split(',')
-#        tags = line[4].split(',')
-#        members = line[7].split(',')
-#        eventL.addOldEvent(line[0],line[1],line[2],population,tags,line[5],line[6],members)
-#    eventL.set_eIDC(lines[-1])
+    f = open('backend/events.txt',"rw+")
+    lines = f.readlines()
+    for line in lines[1:]:
+        line = line.split("/")
+        population = line[3].split(',')
+        tags = line[4].split(',')
+        members = line[7].split(',')
+        eventL.addOldEvent(line[0],line[1],line[2],population,tags,line[5],line[6],members)
+    eventL.set_eIDC(lines[-1])
 # listeners
 
 @server.route('/')
