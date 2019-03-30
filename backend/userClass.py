@@ -36,8 +36,12 @@ class userList:
                 else:
                     return False
         return False
-    def addOldUser(self,username,hashedPassword):
-        self._uList.append(user(username,hashedPassword))
+    def addOldUser(self,username,hashedPassword,events):
+        u = user(username,hashedPassword)
+        u.set_username(username)
+        u.set_pass_H(hashedPassword)
+        u.set_events(events)
+        self._uList.append(u)
 
     # adds user if not in database and returns true, returns false if already in database
     def addUser(self, username, password):

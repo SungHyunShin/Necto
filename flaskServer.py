@@ -13,7 +13,7 @@ uFile = os.path.isfile('backend/users.txt')
 eFile = os.path.isfile('backend/events.txt')
 if uFile:
     pass
-    f = open('backend/users.txt',"rw+")
+    f = open('backend/users.txt',"r")
     lines = f.readlines()
     for line in lines:
         line = line.split("/")
@@ -21,10 +21,11 @@ if uFile:
         userL.addOldUser(line[0],line[1],events)
 if eFile:
     pass
-    f = open('backend/events.txt',"rw+")
+    f = open('backend/events.txt',"r")
     lines = f.readlines()
-    for line in lines[1:]:
+    for line in lines[2:]:
         line = line.split("/")
+        print(line)
         population = line[3].split(',')
         tags = line[4].split(',')
         members = line[7].split(',')
