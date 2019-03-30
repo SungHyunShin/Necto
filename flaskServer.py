@@ -1,7 +1,7 @@
 from flask import request, Flask, jsonify
 
-from eventClasses import event,eventList
-from userClass import userList
+from backend.eventClasses import eventList
+from backend.userClass import userList
 
 server = Flask(__name__)
 
