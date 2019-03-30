@@ -12,6 +12,8 @@ class eventList:
         for event in self._eList:
             jsonL.append(event.jsonEvent())
         return jsonL
+    def set_eIDC(self,eIDC):
+        self._eIDC = eIDC
     def addEvent(self,name,location,population,tags,ownerName,description):
         self._eIDC += 1
         new = event()
@@ -22,6 +24,18 @@ class eventList:
         new.set_tags(tags)
         new.set_description(description)
         new.set_ownerName(ownerName)
+        self._eList.append(new)
+        return self._eIDC
+    def addOldEvent(self,eventID,name,location,population,tags,ownerName,description,members):
+        new = event()
+        new.set_eventID(eventID)
+        new.set_name(name)
+        new.set_location(location)
+        new.set_population((population[0],population[1]))
+        new.set_tags(tags)
+        new.set_description(description)
+        new.set_ownerName(ownerName)
+        new.add_members(members)
         self._eList.append(new)
         return self._eIDC
     def updateEvent(self,eID,name,location,population,tags,ownerName,description):

@@ -36,6 +36,8 @@ class userList:
                 else:
                     return False
         return False
+    def addOldUser(self,username,hashedPassword):
+        self._uList.append(user(username,hashedPassword))
 
     # adds user if not in database and returns true, returns false if already in database
     def addUser(self, username, password):
@@ -73,7 +75,9 @@ class user:
     def get_password(self):
         return self._password
     def set_password(self, password):
-        self._password = password
+        self._password = hashlib.sha3_512(password.encode()).hexdigest()
+    def set_pass_H(self,hashedPassword):
+        self._password = hashedPassword
     def update_password(self, password,new):
         if self._password == hashlib.sha3_512(password.encode()).hexdigest():
             self._password = hashlib.sha3_512(new.encode()).hexdigest()
