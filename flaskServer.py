@@ -1,10 +1,11 @@
 import os
 from flask import request, Flask, jsonify
-
+from flask_cors import CORS
 from backend.eventClasses import eventList
 from backend.userClass import userList
 
 server = Flask(__name__)
+CORS(server)
 userL = userList()
 eventL = eventList()
 
@@ -70,8 +71,6 @@ def check(username):
     if userL.checkUserPW(username,request.json['password']):
         return jsonify({'response':200,'message':'login correct'})
     return jsonify({'response':400,'message':'login incorrect'})
-
-    
 
 @server.route('/users/<username>',methods=['POST'])
 def update(username):
