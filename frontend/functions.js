@@ -47,9 +47,20 @@ var json = [
   "location": "Duncan Student Center",
   "count1": "25",
   "count2": "10",
-  "tags": "social",
+  "tags": "Food",
   "owner": "Andy Shin"
   },
+
+  {
+  "name": "Disco Roll",
+  "time": "9pm",
+  "description": "all night long~~~~",
+  "location": "Dank-eee ballroom",
+  "count1": "200",
+  "count2": "42",
+  "tags": "Sports",
+  "owner": "Keenan Hall"
+  }
 
 ]
 
@@ -66,10 +77,11 @@ function pushCards(json){
      var eventTotalCount = obj.count1;
      var eventOwner = obj.owner;
      var eventTag = obj.tags;
+     var cardBG = eventTag.split(", ")[0];
 
     var cardHTML = `
     <div class = "card shadow-sm">
-      <div class = "cardEvent bg-primary text-left">
+      <div class = "cardEvent FILLER_BG text-left">
         <div class= "cardDate h4 small">
           FILLER_DATE
         </div>
@@ -80,19 +92,27 @@ function pushCards(json){
           FILLER_DESC
         </small>
       </div><br>
-        <span class = "cardAction" style="font-size: 2em; color: white;">
-          <i class="far fa-map"></i>
-        </span>
+        <div style="position: absolute; top:147px; left:20px; width:200px; height:25px">
+          <span class = "cardAction" style="font-size: 2em; color: white;">
+            <i class="far fa-map"></i>
+          </span>
+        </div>
         <DIV style="position: absolute; top:160px; left:60px; width:200px; height:25px">
           FILLER_LOC
         </DIV>
 
-        <button type="button" class="btn btn-light cardButton" style="float:right;">Join In</button>
-        <button type="button" class="btn btn-light cardButton" style="float:right;">View</button>
+        <button type="button" class="btn btn-light cardButton" style="position: absolute; top:153px; left:362px; width:90px; height:35px">Join In</button>
+        <button type="button" class="btn btn-light cardButton" style="position: absolute; top:153px; left:260px; width:90px; height:35px">View</button>
       </div>
       <div class = "cardStat">
-        <div class = "info h1">
-          FILLER_CURR <br> FILLER_TOT
+        <div class = "openspots">
+          <div class = "spots">Open spots:</div>
+          <div class = "spotnum">FILLER_CURR</div>
+        </div>
+        <hr class = "spotsbreak">
+        <div class = "totspots">
+          <div class = "spots">Total spots:</div>
+          <div class = "spotnum">FILLER_TOT</div>
         </div>
       </div>
     </div>
@@ -103,6 +123,20 @@ function pushCards(json){
     cardHTML = cardHTML.replace('FILLER_LOC', eventLocation);
     cardHTML = cardHTML.replace('FILLER_CURR', eventCurrentCount);
     cardHTML = cardHTML.replace('FILLER_TOT', eventTotalCount);
+
+    if(cardBG == "Academics"){
+      cardHTML = cardHTML.replace('FILLER_BG', "cc-acad");
+    }else if(cardBG == "Food"){
+      cardHTML = cardHTML.replace('FILLER_BG', "cc-food");
+    }else if(cardBG == "Faith"){
+      cardHTML = cardHTML.replace('FILLER_BG', "cc-faith");
+    }else if(cardBG == "Sports"){
+      cardHTML = cardHTML.replace('FILLER_BG', "cc-sports");
+    }else if(cardBG == "Travel"){
+      cardHTML = cardHTML.replace('FILLER_BG', "cc-travel");
+    }else{
+      cardHTML = cardHTML.replace('FILLER_BG', "cc-other");
+    }
 
     div.innerHTML += cardHTML;
 
