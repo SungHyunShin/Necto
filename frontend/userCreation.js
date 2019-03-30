@@ -18,7 +18,7 @@ function uploadAccount(){
   request.open('POST', url, true);
   request.onload = function() {
     if(this.readyState==4 && this.status==200){
-        console.log(request).responseText)
+        console.log(request).responseText;
     }
   };
 
