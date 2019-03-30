@@ -1,4 +1,4 @@
-from flask import request,Flask, jsonify
+from flask import request, Flask, jsonify
 
 from eventClasses import event,eventList
 from userClass import userList
@@ -8,6 +8,10 @@ server = Flask(__name__)
 userL = userList()
 eventL = eventList()
 # listeners
+
+@server.route('/')
+def test():
+    return jsonify({'response':200,'message':'OK'})
 
 # users
 @server.route('/users',methods=['GET'])
