@@ -45,7 +45,7 @@ class event:
     _eventID = -1
     _location = ""
     _population = (-1,-1)
-    _tags = [];
+    _tags = []
     # functions to access private variables
     def get_name(self):
         return self._name

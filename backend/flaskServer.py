@@ -1,6 +1,7 @@
 from flask import request,Flask, jsonify
 
-from classes import event,eventList
+from eventClasses import event,eventList
+from userClass import user,userList
 
 server = Flask(__name__)
 
@@ -23,7 +24,6 @@ def find_tags():
     for event in eventFound:
         eventsReturn.append(event.jsonEvent())
     return jsonify({'response':200,'message':'OK','events':eventsReturn})
-
 
 # DELETE /events
 @server.route('/events',methods=['DELETE'])
@@ -67,9 +67,9 @@ def remove_event(eventID):
     eventL.deleteEvent(eventID)
     return jsonify({'response':200,'message':'OK'})
 
-
 # main run server
 if __name__ == '__main__':
-    # create class of events
+    # create classes
+    userL = userList()
     eventL = eventList()
     server.run(debug=True)
