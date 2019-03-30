@@ -2,6 +2,10 @@
 class eventList:
     # private variables
     _eList = []
+    _eIDC = 0
+    def __init__(self):
+        _eIDC = 0
+        _eList = []
     # returns entire movie list in json format
     def jsonList(self):
         jsonL = []
@@ -9,11 +13,11 @@ class eventList:
             jsonL.append(event.jsonEvent())
         return jsonL
     def addEvent(self,event):
-        look = self.findEvent(event.get_eventID()) 
-        if look == None:
-            self._eList.append(event)
-            return
-        look.update(event)
+        self._eIDC += 1
+        event.set_eventID(self._eIDC)
+        self._eList.append(event)
+        return self._eIDC
+        
     def findEvent(self,eID):
         found = False
         for event in self._eList:
@@ -77,7 +81,6 @@ class event:
         return returnD
     def update(self,event):
         self._name = event.get_name()
-        self._eventID = event.get_eventID()
         self._location = event.get_location()
         self._population = event.get_population()
         self._tags = event.get_tags()

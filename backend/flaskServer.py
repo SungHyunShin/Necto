@@ -25,6 +25,24 @@ def find_tags():
         eventsReturn.append(event.jsonEvent())
     return jsonify({'response':200,'message':'OK','events':eventsReturn})
 
+# POST /events
+@server.route('/events', methods=['POST'])
+def create_event():
+    # wrong response, return error code 400
+    if not request.json or not 'name' in request.json or not 'location' in request.json or not 'population' in request.json or not 'tags' in request.json:
+        return jsonify({'response':400,'message':'missing parameters'})
+    returnD = dict()
+    returnD['response']=200
+    returnD['message']='OK'
+    new = event()
+    new.set_name(request.json['name'])
+    new.set_location(request.json['location'])
+    new.set_population((request.json['population'][0],request.json['population'][1]))
+    new.set_tags(request.json['tags'])
+    eID = eventL.addEvent(new)
+    returnD['eventID'] = eID
+    return jsonify(returnD)
+
 # DELETE /events
 @server.route('/events',methods=['DELETE'])
 def reset_eventList():
@@ -42,7 +60,7 @@ def find_event(event_ID):
 
 # POST /events/eventID
 @server.route('/events/<int:eventID>', methods=['POST'])
-def create_event(eventID):
+def update_event(eventID):
     # wrong response, return error code 400
     if not request.json or not 'name' in request.json or not 'location' in request.json or not 'population' in request.json or not 'tags' in request.json:
         return jsonify({'response':400,'message':'missing parameters'})
@@ -51,17 +69,15 @@ def create_event(eventID):
     returnD['message']='OK'
     new = eventL.findEvent(eventID)
     if new == None:
-        new = event()
+        return jsonify({'response':404,'message':'event '+str(eventID)+' not found'})
     new.set_name(request.json['name'])
-    new.set_eventID(eventID)
     new.set_location(request.json['location'])
     new.set_population((request.json['population'][0],request.json['population'][1]))
     new.set_tags(request.json['tags'])
-    eventL.addEvent(new)
     returnD['eventID']=eventID
     return jsonify(returnD)
 
-# POST /events/eventID
+# DELETE /events/eventID
 @server.route('/events/<int:eventID>', methods=['DELETE'])
 def remove_event(eventID):
     eventL.deleteEvent(eventID)
