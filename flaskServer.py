@@ -1,4 +1,4 @@
-umport os
+import os
 from flask import request, Flask, jsonify
 
 from backend.eventClasses import eventList
