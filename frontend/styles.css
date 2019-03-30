@@ -176,3 +176,15 @@ body {
 .cardButton {
   margin-left: 10px;
 }
+
+
+.logsign{
+	background-color: #7f4d2c;
+	border-color: #fdc02e;
+	color: #fdc02e;
+}
+
+.logsign:hover{
+	color: #fdc02e;
+	background-color: #543018;
+}
