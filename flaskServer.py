@@ -5,7 +5,8 @@ from backend.eventClasses import eventList
 from backend.userClass import userList
 
 server = Flask(__name__)
-CORS(server, resources={r"/*": {"origins": "*"}}, send_wildcard=True)
+cors = CORS(server)
+server.config['CORS_HEADERS'] = 'Content-Type'
 userL = userList()
 eventL = eventList()
 
