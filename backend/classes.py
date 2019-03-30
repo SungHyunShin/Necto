@@ -6,30 +6,37 @@ class eventList:
     def jsonList(self):
         jsonL = []
         for event in self._eList:
-            eventD = dict()
-            eventD['name'] = event.get_name()
-            eventD['eventID'] = event.get_eventID()
-            eventD['location'] = event.get_location()
-            eventD['population'] = event.get_population()
-            eventD['tags'] = event.get_tags()
-            jsonL.append(eventD)
+            jsonL.append(event.jsonEvent())
         return jsonL
     def addEvent(self,event):
-        self._eList.append(event)
+        look = self.findEvent(event.get_eventID()) 
+        if look == None:
+            self._eList.append(event)
+            return
+        look.update(event)
     def findEvent(self,eID):
         found = False
         for event in self._eList:
             if event.get_eventID() == eID:
-                found = True
-                eventDict = {}
-                eventDict['name'] = event.get_name()
-                eventDict['eventID'] = event.get_eventID()
-                eventDict['location'] = event.get_location()
-                p = event.get_population()
-                eventDict['population'] = [p[0],p[1]]
-                eventDict['tags'] = event.get_tags()
-                return eventDict
+                return event
         return None
+    def deleteEvent(self,eID):
+        for event in self._eList:
+            if event.get_eventID() == eID:
+                self._eList.remove(event)
+    def resetList(self):
+        self._eList = []
+        return
+    def findTags(self,tags):
+        returnL = []
+        for event in self._eList:
+            eTags = event.get_tags()
+            for tag in tags:
+                if tag in eTags and event not in returnL:
+                    returnL.append(event)
+        return returnL
+
+
 
 # class for events
 class event:
@@ -60,3 +67,17 @@ class event:
         return self._tags
     def set_tags(self,tags):
         self._tags = tags
+    def jsonEvent(self):
+        returnD = dict()
+        returnD ['name']=self._name
+        returnD['eventID']=self._eventID
+        returnD['location']=self._location
+        returnD['population']=[self._population[0],self._population[1]]
+        returnD['tags'] =self._tags
+        return returnD
+    def update(self,event):
+        self._name = event.get_name()
+        self._eventID = event.get_eventID()
+        self._location = event.get_location()
+        self._population = event.get_population()
+        self._tags = event.get_tags()
