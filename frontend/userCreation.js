@@ -4,7 +4,6 @@ function submitAccount() {
  }
 
 function uploadAccount(){
-   
    var userName = document.getElementById("userName").value;
    var userPassword = document.getElementById("userPassword").value;
    var userEmail = document.getElementById("userEmail").value;
@@ -14,12 +13,28 @@ function uploadAccount(){
    userInfo.append('userPassword', userPassword);
    userInfo.append('userEmail', userEmail);
 
-  var request = new XMLHttpRequest();
-  request.open('POST', url, true);
-  request.onload = function() {
+   var request = new XMLHttpRequest();
+   request.open('POST', url, true);
+   request.onload = function() {
     if(this.readyState==4 && this.status==200){
         console.log(request).responseText;
     }
   };
+ 
+  request.send(eventInfo);
+  refresh();
+}
 
+function refresh() {
+}
+
+var user = [
+  {
+  "username": "Jin",
+  "password": "pass",
+  "eventsJ": "Ice Cream Social, Hackathon",
+  "eventsO": "Hackathon, Dome Dance"
+  }
+]
+    
 window.addEventListener("load", submitAccount, false);
