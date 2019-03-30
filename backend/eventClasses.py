@@ -12,17 +12,48 @@ class eventList:
         for event in self._eList:
             jsonL.append(event.jsonEvent())
         return jsonL
-    def addEvent(self,event):
+    def addEvent(self,name,location,population,tags,ownerName,description):
         self._eIDC += 1
-        event.set_eventID(self._eIDC)
-        self._eList.append(event)
+        new = event()
+        new.set_eventID(self._eIDC)
+        new.set_name(name)
+        new.set_location(location)
+        new.set_population((population[0],population[1]))
+        new.set_tags(tags)
+        new.set_description(description)
+        new.set_ownerName(ownerName)
+        self._eList.append(new)
         return self._eIDC
-        
-    def findEvent(self,eID):
-        found = False
+    def updateEvent(self,eID,name,location,population,tags,ownerName,description):
         for event in self._eList:
             if event.get_eventID() == eID:
-                return event
+                new = event
+                new.set_name(name)
+                new.set_location(location)
+                new.set_population((population[0],population[1]))
+                new.set_tags(tags)
+                new.set_description(description)
+                new.set_ownerName(ownerName)
+                event.update(new)
+                return eID
+        return None
+    def checkOwner(self,eID,name):
+        for event in self._eList:
+            if event.get_eventID() == eID:
+                return event.isowner(name)
+    def getOwner(self,eID):
+        for event in self._eList:
+            if event.get_eventID() == eID:
+                return event.get_ownerName()
+    def findEvent(self,eID):
+        for event in self._eList:
+            if event.get_eventID() == eID:
+                return eID
+        return None
+    def eventJson(self,eID):
+        for event in self._eList:
+            if event.get_eventID() == eID:
+                return event.jsonEvent()
         return None
     def deleteEvent(self,eID):
         for event in self._eList:
@@ -37,10 +68,8 @@ class eventList:
             eTags = event.get_tags()
             for tag in tags:
                 if tag in eTags and event not in returnL:
-                    returnL.append(event)
+                    returnL.append(event.jsonEvent())
         return returnL
-
-
 
 # class for events
 class event:
@@ -50,6 +79,9 @@ class event:
     _location = ""
     _population = (-1,-1)
     _tags = []
+    _description = ""
+    _ownerName = ""
+    _members = []
     # functions to access private variables
     def get_name(self):
         return self._name
@@ -71,6 +103,29 @@ class event:
         return self._tags
     def set_tags(self,tags):
         self._tags = tags
+    def get_description(self):
+        return self._description
+    def set_description(self,desc):
+        self._description = desc
+    def get_ownerName(self):
+        return self._ownerName
+    def set_ownerName(self,name):
+        self._ownerName = name
+    def get_members(self):
+        return self._members
+    def reset_members(self):
+        self._members = []
+    def add_member(self,member):
+        self._members.append(member)
+    def add_members(self,members):
+        self._members = self._members + members
+
+    def isowner(self,username):
+        if self._ownerName == username:
+            return True
+        else:
+            return False
+
     def jsonEvent(self):
         returnD = dict()
         returnD ['name']=self._name
@@ -78,9 +133,16 @@ class event:
         returnD['location']=self._location
         returnD['population']=[self._population[0],self._population[1]]
         returnD['tags'] =self._tags
+        returnD['description'] = self._description
+        returnD['ownerName'] = self._ownerName
+        returnD['members'] = self._members
         return returnD
+
     def update(self,event):
         self._name = event.get_name()
         self._location = event.get_location()
         self._population = event.get_population()
         self._tags = event.get_tags()
+        self._description = event.get_description()
+        self._ownerName = event.get_ownerName()
+        self._members = event.get_members()
