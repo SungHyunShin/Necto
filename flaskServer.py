@@ -137,6 +137,7 @@ def create_event():
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
+
 # DELETE /events
 @server.route('/events',methods=['DELETE'])
 def reset_eventList():
@@ -145,6 +146,7 @@ def reset_eventList():
     if request.json['ownerName'] != 'admin' or not userL.checkUserPW('admin',request.json['password']):
         return jsonify({'response':400,'message':'request denied'})
     eventL.resetList()
+    eventL.writeEventInfo()
     return jsonify({'response':200,'message':'OK'})
 
 # GET /events/eventID
