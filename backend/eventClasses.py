@@ -88,7 +88,8 @@ class eventList:
         for event in self._eList:
             eTags = event.get_tags()
             for tag in tags:
-                if tag in eTags and event not in returnL:
+                if tag in eTags:
+                    break
                     returnL.append(event.jsonEvent())
         return returnL
 
