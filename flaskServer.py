@@ -119,11 +119,11 @@ def find_tags():
 def create_event():
     # wrong response, return error code 400
     if not request.json or not 'name' in request.json or not 'location' in request.json or not 'population' in request.json or not 'tags' in request.json or not 'description' in request.json or not 'ownerName' in request.json:
-        response = flask.jsonify({'response':400,'message':'missing parameters'})
+        response = jsonify({'response':400,'message':'missing parameters'})
         response.headers.add('Access-Control-Allow-Origin', '*')
         return response
     if not userL.checkUser(request.json['ownerName']):
-        response = flask.jsonify({'response':400,'message':'owner does not exist'})
+        response = jsonify({'response':400,'message':'owner does not exist'})
         response.headers.add('Access-Control-Allow-Origin', '*')
         return response
     returnD = dict()
@@ -132,7 +132,7 @@ def create_event():
     eID = eventL.addEvent(request.json['name'],request.json['location'],request.json['population'],request.json['tags'],request.json['ownerName'],request.json['description'])
     returnD['eventID'] = eID
     eventL.writeEventInfo()
-    response =  flask.jsonify(returnD)
+    response =  jsonify(returnD)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
