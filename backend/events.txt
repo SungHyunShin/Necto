@@ -1,2 +1,2 @@
-1/puppies/North Quad/-1,-1//admin/puppies on the quad/admin
+1/puppies/North Quad/-1,-1/Sports/admin/puppies on the quad/admin
 2/hackathon/hesburgh library/2,4/Academic,Food/admin/hackathon 2019/admin
