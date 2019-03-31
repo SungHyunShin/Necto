@@ -106,7 +106,7 @@ def get_events():
 
 # PUT /events
 @server.route('/events', methods=['PUT'])
-def find_tags():
+def find_event_tags():
     if not request.json:
         return jsonify({'response':400,'message':'missing request'})
     if not 'tags' in request.json:
