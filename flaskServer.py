@@ -108,7 +108,9 @@ def get_events():
 # PUT /events
 @server.route('/events', methods=['PUT'])
 def find_tags():
-    if not request.json or not 'tags' in request.json:
+    if not request.json:
+        return jsonify({'response':400,'message':'missing request'})
+    if not 'tags' in request.json:
         return jsonify({'response':400,'message':'missing parameters'})
     if 'all' in request.json['tags']:
         return jsonify({'response':200,'message':'OK','events': eventL.jsonList()})
