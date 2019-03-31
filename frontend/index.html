@@ -23,14 +23,21 @@
   <!-- <script src="js/scripts.js"></script> -->
   <!-- Image and text -->
   <nav class="navbar fixed-top w3-brown">
-    <div class ="mx-auto">
-      <a class="navbar-brand navbar-light titlefont" href="#">
-        <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-        necto
-      </a>
+    <div class = "container fillnav">
+      <div class = "leaveempty col-4"></div>
+      <div class = "centertitle col-4">
+        <a class="navbar-brand navbar-light titlefont" href="#">
+          <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+          necto
+        </a>
+      </div>
+      <div class = "emptyagain col-1"></div>
+      <div class = "buttonsdiv col-3">
+        <div class = "lsign"><button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modalLoginForm">Log In</button></div>
+        <div class = "lsign"><button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modalRegisterForm">Sign Up</button></div>
+      </div>
     </div>
-    <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modalLoginForm">Log In</button>
-    <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modalRegisterForm">Sign Up</button>
+
   </nav>
 
 <!-- wonseok -->
@@ -207,16 +214,15 @@ $(".tag").on("click", function(){
             </div>
             <div class="eventTagLabel">
              <label for="exampleSelect2">Tags</label>
-             <select multiple class="form-control" id="eventTagLabel">
-               <option>Academics</option>
-               <option>Faith</option>
-               <option>Food</option>
-               <option>Fitness</option>
-               <option>Sports</option>
-               <option>Travel</option>
-               <option>Other</option>
-
-             </select>
+             <div id="eventTagLabel">
+              <input type="checkbox" id="Academics" name="Tags" value="Academics"><label for="Academics">Academics</label>
+              <input type="checkbox" id="Faith" name="Tags" value="Faith"><label for="Faith">Faith</label>
+              <input type="checkbox" id="Food" name="Tags" value="Food"><label for="Food">Food</label>
+              <input type="checkbox" id="Fitness" name="Tags" value="Fitness"><label for="Fitness">Fitness</label>
+              <input type="checkbox" id="Sports" name="Tags" value="Sports"><label for="Sports">Sports</label>
+              <input type="checkbox" id="Travel" name="Tags" value="Travel"><label for="Travel">Travel</label>
+              <input type="checkbox" id="Other" name="Tags" value="Other"><label for="Other">Other</label>
+              </div>
            </div>
           </form>
         </div>

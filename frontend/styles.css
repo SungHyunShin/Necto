@@ -178,6 +178,10 @@ body {
 }
 
 
+.lsign{
+  display: inline-block;
+}
+
 .logsign{
 	background-color: #7f4d2c;
 	border-color: #fdc02e;
@@ -187,4 +191,47 @@ body {
 .logsign:hover{
 	color: #fdc02e;
 	background-color: #543018;
+}
+
+
+.cc-acad{
+  background-color: #157ffb;
+}
+.cc-faith{
+  background-color: #24a2b6;
+}
+.cc-food{
+  background-color: #d93749;
+}
+.cc-sports{
+  background-color: #6c757d;
+}
+.cc-travel{
+  background-color: #343a40;
+}
+.cc-other{
+  background-color: #24a2b6;
+}
+
+.spots{
+  font-size: 15px;
+}
+
+.spotnum{
+  font-size: 50px;
+}
+
+.openspots{
+  position: relative;
+  height: 49%;
+}
+
+.spotsbreak{
+  height: 2%;
+  margin: 0 0 0 0;
+}
+
+.totspots{
+  position: relative;
+  height:49%;
 }
