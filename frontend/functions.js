@@ -12,6 +12,14 @@
    var eventLocation = document.getElementById("eventLocationLabel").value;
    var eventCount = document.getElementById("eventCountLabel").value;
    var eventTag = document.getElementById("eventTagLabel").value;
+   var cBoxes = document.getElementsByName("Tags");
+   var cChecked = [];
+   for (var i = 0;i<cBoxes.length;i++){
+     if (cBoxes[i].checked){
+       cChecked.push($(cBoxes[i]).attr("value"));
+     }
+   }
+   var eventTags = cChecked.join(", ");
 
    var eventInfo = new FormData();
    eventInfo.append('name', eventName);
@@ -79,8 +87,10 @@ function pushCards(json){
      var eventTag = obj.tags;
      var cardBG = eventTag.split(", ")[0];
 
-    var cardHTML = `
-    <div class = "card shadow-sm">
+
+
+     var cardHTML = `
+     <div class = "card shadow-sm">
       <div class = "cardEvent FILLER_BG text-left">
         <div class= "cardDate h4 small">
           FILLER_DATE
@@ -111,7 +121,7 @@ function pushCards(json){
         </div>
         <hr class = "spotsbreak">
         <div class = "totspots">
-          <div class = "spots">Total spots:</div>
+          <div cl ass = "spots">Total spots:</div>
           <div class = "spotnum">FILLER_TOT</div>
         </div>
       </div>
@@ -140,7 +150,37 @@ function pushCards(json){
 
     div.innerHTML += cardHTML;
 
+    var inputHTML = `
+    {
+    "name": "FILLER_DATE",
+    "time": "FILLER_TIME",
+    "description": "FILLER_DESC",
+    "location": "FILLER_LOC",
+    "count1": "FILLER_CURR",
+    "count2": "FILLER_TOT",
+    "owner": "NOBODY FOR NOW"
+    }
+    `
+
+    inputHTML = inputHTML.replace('FILLER_DATE', eventTime);
+    inputHTML = inputHTML.replace('FILLER_NAME', eventName);
+    inputHTML = inputHTML.replace('FILLER_DESC', eventDesc);
+    inputHTML = inputHTML.replace('FILLER_LOC', eventLocation);
+    inputHTML = inputHTML.replace('FILLER_CURR', eventCurrentCount);
+    inputHTML = inputHTML.replace('FILLER_TOT', eventTotalCount);
+    
+    /// write to file
+    var txtFile = "fake.json";
+    var file = new File(txtFile);
+    var str = inputHTML;
+
+    file.open("w"); // open file with write access
+    file.write(str);
+    file.close();
+
   }
+
+  
 
 }
 
