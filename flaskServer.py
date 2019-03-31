@@ -4,9 +4,7 @@ from flask_cors import CORS, cross_origin
 from backend.eventClasses import eventList
 from backend.userClass import userList
 
-server = Flask(__name__)
-cors = CORS(server)
-server.config['CORS_HEADERS'] = 'Content-Type'
+
 userL = userList()
 eventL = eventList()
 
@@ -43,6 +41,9 @@ if eFile:
             members = line[7].split(',')
             eventL.addOldEvent(line[0],line[1],line[2],population,tags,line[5],line[6],members)
     eventL.set_eIDC(int(lines[0]))
+server = Flask(__name__)
+cors = CORS(server)
+server.config['CORS_HEADERS'] = 'Content-Type'
 # listeners
 #@server.route('/')
 #@cross_origin()
