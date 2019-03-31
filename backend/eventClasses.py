@@ -92,6 +92,7 @@ class eventList:
                     inside = True
             if inside:
                 jsonL.append(event.jsonEvent())
+        print(jsonL)
         return jsonL
 
 # class for events
