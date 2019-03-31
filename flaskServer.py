@@ -98,6 +98,7 @@ def remove_user(username):
         return jsonify({'response':200,'message':'OK'})
     return jsonify({'response':400,'message':'permission denied'})
 
+
 # events
 # GET /events
 @server.route('/events', methods=['GET'])
