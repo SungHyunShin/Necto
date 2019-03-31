@@ -1,2 +1,1 @@
-api: gunicorn flaskServer:server
-web: vendor/bin/heroku-php-apache2
+web: gunicorn flaskServer:server
