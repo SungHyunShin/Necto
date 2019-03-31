@@ -44,7 +44,6 @@ if eFile:
             eventL.addOldEvent(line[0],line[1],line[2],population,tags,line[5],line[6],members)
     eventL.set_eIDC(int(lines[0]))
 # listeners
-
 #@server.route('/')
 #@cross_origin()
 #def test():
