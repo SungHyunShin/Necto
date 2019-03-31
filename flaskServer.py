@@ -58,7 +58,6 @@ def test():
 #    return jsonify({'response':200,'message':'OK','users':userL.returnNames()})
 
 @server.route('/users',methods=['POST'])
-@cross_origin(origin='necto.herokuapp',headers=['Content- Type','Authorization'])
 def add_user():
     if not request.json or not 'username' in request.json or not 'password' in request.json:
         return jsonify({'response':400,'message':'missing parameters'})
@@ -68,7 +67,6 @@ def add_user():
     return jsonify({'response':400,'message':'username exists'})
 
 @server.route('/users/<username>',methods=['PUT'])
-@cross_origin(origin='necto.herokuapp',headers=['Content- Type','Authorization'])
 def check(username):
     if not request.json or not 'password' in request.json:
         return jsonify({'response':400,'message':'missing parameters'})
@@ -77,7 +75,6 @@ def check(username):
     return jsonify({'response':400,'message':'login incorrect'})
 
 @server.route('/users/<username>',methods=['POST'])
-@cross_origin(origin='necto.herokuapp',headers=['Content- Type','Authorization'])
 def update(username):
     if not request.json or not 'password' in request.json or 'newPW' not in request.json and 'newUser' not in request.json:
         return jsonify({'response':400,'message':'missing parameters'})
@@ -93,7 +90,6 @@ def update(username):
         return jsonify({'response':400,'message':'permission denied'})
 
 @server.route('/users/<username>',methods=['DELETE'])
-@cross_origin(origin='necto.herokuapp',headers=['Content- Type','Authorization'])
 def remove_user(username):
     if not request.json or not 'password' in request.json:
         return jsonify({'response':400,'message':'missing parameters'})
@@ -105,13 +101,11 @@ def remove_user(username):
 # events
 # GET /events
 @server.route('/events', methods=['GET'])
-@cross_origin(origin='necto.herokuapp',headers=['Content- Type','Authorization'])
 def get_events():
     return jsonify({'response':200,'message':'OK','events': eventL.jsonList()})
 
 # PUT /events
 @server.route('/events', methods=['PUT'])
-@cross_origin(origin='necto.herokuapp',headers=['Content- Type','Authorization'])
 def find_tags():
     if not request.json or not 'tags' in request.json:
         return jsonify({'response':400,'message':'missing parameters'})
@@ -122,24 +116,28 @@ def find_tags():
 
 # POST /events
 @server.route('/events', methods=['POST'])
-@cross_origin(origin='necto.herokuapp',headers=['Content- Type','Authorization'])
 def create_event():
     # wrong response, return error code 400
     if not request.json or not 'name' in request.json or not 'location' in request.json or not 'population' in request.json or not 'tags' in request.json or not 'description' in request.json or not 'ownerName' in request.json:
-        return jsonify({'response':400,'message':'missing parameters'})
+        response = jsonify({'response':400,'message':'missing parameters'})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
     if not userL.checkUser(request.json['ownerName']):
-        return jsonify({'response':400,'message':'owner does not exist'})
+        response = jsonify({'response':400,'message':'owner does not exist'})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
     returnD = dict()
     returnD['response']=200
     returnD['message']='OK'
     eID = eventL.addEvent(request.json['name'],request.json['location'],request.json['population'],request.json['tags'],request.json['ownerName'],request.json['description'])
     returnD['eventID'] = eID
     eventL.writeEventInfo()
-    return jsonify(returnD)
+    response =  jsonify(returnD)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 # DELETE /events
 @server.route('/events',methods=['DELETE'])
-@cross_origin(origin='necto.herokuapp',headers=['Content- Type','Authorization'])
 def reset_eventList():
     if not request.json or not 'ownerName' in request.json or not 'password' in request.json:
         return jsonify({'response':400,'message':'missing parameters'})
@@ -150,7 +148,6 @@ def reset_eventList():
 
 # GET /events/eventID
 @server.route('/events/<int:event_ID>',methods=['GET'])
-@cross_origin(origin='necto.herokuapp',headers=['Content- Type','Authorization'])
 def find_event(event_ID):
     search = eventL.eventJson(event_ID)
     if search == None:
@@ -160,7 +157,6 @@ def find_event(event_ID):
 
 # POST /events/eventID
 @server.route('/events/<int:eventID>', methods=['POST'])
-@cross_origin(origin='necto.herokuapp',headers=['Content- Type','Authorization'])
 def update_event(eventID):
     # wrong response, return error code 400
     if not request.json or not 'name' in request.json or not 'location' in request.json or not 'population' in request.json or not 'tags' in request.json or not 'description' in request.json or not 'ownerName' in request.json or not 'username' in request.json or not 'password' in request.json:
@@ -188,7 +184,6 @@ def update_event(eventID):
 
 # DELETE /events/eventID
 @server.route('/events/<int:eventID>', methods=['DELETE'])
-@cross_origin(origin='necto.herokuapp',headers=['Content- Type','Authorization'])
 def remove_event(eventID):
     if not request.json or not 'username' in request.json or not 'password' in request.json:
         return jsonify({'response':400,'message':'missing parameters'})
