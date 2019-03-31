@@ -137,6 +137,7 @@ def create_event():
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
+
 # DELETE /events
 @server.route('/events',methods=['DELETE'])
 def reset_eventList():
