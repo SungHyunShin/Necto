@@ -84,14 +84,15 @@ class eventList:
         self._eList = []
         return
     def findTags(self,tags):
-        returnL = []
+        jsonL = []
         for event in self._eList:
-            eTags = event.get_tags()
+            inside = False
             for tag in tags:
-                if tag in eTags:
-                    break
-                    returnL.append(event.jsonEvent())
-        return returnL
+                if tag in event.get_tags():
+                    inside = True
+            if inside:
+                jsonL.append(event.jsonEvent())
+        return jsonL
 
 # class for events
 class event:

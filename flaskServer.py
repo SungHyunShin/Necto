@@ -113,8 +113,7 @@ def find_tags():
         return jsonify({'response':400,'message':'missing parameters'})
     if 'all' in request.json['tags']:
         return jsonify({'response':200,'message':'OK','events': eventL.jsonList()})
-    eventFound = eventL.findTags(request.json['tags'])
-    return jsonify({'response':200,'message':'OK','events':eventFound})
+    return jsonify({'response':200,'message':'OK','events':eventL.findTags(request.json['tags'])})
 
 # POST /events
 @server.route('/events', methods=['POST'])
