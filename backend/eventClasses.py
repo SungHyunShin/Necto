@@ -149,7 +149,7 @@ class event:
 
     def jsonEvent(self):
         returnD = dict()
-        returnD ['name']=self._name
+        returnD['name']=self._name
         returnD['eventID']=self._eventID
         returnD['location']=self._location
         returnD['population']=[self._population[0],self._population[1]]
