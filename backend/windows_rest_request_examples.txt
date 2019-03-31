@@ -1,3 +1,4 @@
 POST request:
  curl -H "Content-Type: application/json" -X POST -d "{\"name\":\"a\",\"location\":\"library\",\"population\":[2,4],\"tags\":[\"monkey\"]}" http://127.0.0.1:5000/events/3
 
+curl -H "Content-Type: application/json" -X POST -d "{\"name\":\"a\",\"location\":\"library\",\"population\":[2,4],\"tags\":[\"Food\"],\"description\":\"a\",\"ownerName\":\"admin\"}" https://necto-flask.herokuapp.com/events
