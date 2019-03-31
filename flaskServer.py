@@ -61,7 +61,7 @@ def add_user():
     if not request.json or not 'username' in request.json or not 'password' in request.json:
         return jsonify({'response':400,'message':'missing parameters'})
     if userL.addUser(request.json['username'],request.json['password']):
-        userL.writeUserInfo()
+        #userL.writeUserInfo()
         return jsonify({'response':200,'message':'OK','username':request.json['username']})
     return jsonify({'response':400,'message':'username exists'})
 
@@ -79,12 +79,12 @@ def update(username):
         return jsonify({'response':400,'message':'missing parameters'})
     if 'newPW' in request.json:
         if userL.updatePassword(username,request.json['password'],request.json['newPW']):
-            userL.writeUserInfo()
+            #userL.writeUserInfo()
             return jsonify({'response':200,'message':'OK'})
         return jsonify({'response':400,'message':'permission denied'})
     if 'newUser' in request.json:
         if userL.updateUsername(username,request.json['newUser'],request.json['password']):
-            userL.writeUserInfo()
+            #userL.writeUserInfo()
             return jsonify({'response':200,'message':'OK'})
         return jsonify({'response':400,'message':'permission denied'})
 
@@ -93,7 +93,7 @@ def remove_user(username):
     if not request.json or not 'password' in request.json:
         return jsonify({'response':400,'message':'missing parameters'})
     if userL.removeUser(username,request.json['password']):
-        userL.writeUserInfo()
+        #userL.writeUserInfo()
         return jsonify({'response':200,'message':'OK'})
     return jsonify({'response':400,'message':'permission denied'})
 
@@ -130,7 +130,7 @@ def create_event():
     returnD['message']='OK'
     eID = eventL.addEvent(request.json['name'],request.json['location'],request.json['population'],request.json['tags'],request.json['ownerName'],request.json['description'])
     returnD['eventID'] = eID
-    eventL.writeEventInfo()
+    #eventL.writeEventInfo()
     response =  jsonify(returnD)
     return response
 
@@ -143,7 +143,7 @@ def reset_eventList():
     if request.json['ownerName'] != 'admin' or not userL.checkUserPW('admin',request.json['password']):
         return jsonify({'response':400,'message':'request denied'})
     eventL.resetList()
-    eventL.writeEventInfo()
+    #eventL.writeEventInfo()
     return jsonify({'response':200,'message':'OK'})
 
 # GET /events/eventID
@@ -173,7 +173,7 @@ def update_event(eventID):
             returnD['response']= 400
             returnD['message']='didn\'t update'
         else:
-            eventL.writeEventInfo()
+            #eventL.writeEventInfo()
             returnD['response']=200
             returnD['message']='OK'
         returnD['eventID']=eventID
@@ -189,7 +189,7 @@ def remove_event(eventID):
         return jsonify({'response':400,'message':'missing parameters'})
     if eventL.checkOwner(eventID,request.json['username']) and userL.checkUserPW(eventL.getOwner(eventID),request.json['password']):
         eventL.deleteEvent(eventID)
-        eventL.writeEventInfo()
+        #eventL.writeEventInfo()
         return jsonify({'response':200,'message':'OK'})
     else:
         return jsonify({'response':400,'message':'Permission denied'})
