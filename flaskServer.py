@@ -10,7 +10,7 @@ server.config['CORS_HEADERS'] = 'Content-Type'
 userL = userList()
 eventL = eventList()
 
-'''uFile = os.path.isfile('backend/users.txt')
+uFile = os.path.isfile('backend/users.txt')
 eFile = os.path.isfile('backend/events.txt')
 if uFile:
     pass
@@ -42,7 +42,7 @@ if eFile:
         else:
             members = line[7].split(',')
             eventL.addOldEvent(line[0],line[1],line[2],population,tags,line[5],line[6],members)
-    eventL.set_eIDC(int(lines[0]))'''
+    eventL.set_eIDC(int(lines[0]))
 # listeners
 #@server.route('/')
 #@cross_origin()
