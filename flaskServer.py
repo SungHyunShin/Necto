@@ -10,7 +10,7 @@ server.config['CORS_HEADERS'] = 'Content-Type'
 userL = userList()
 eventL = eventList()
 
-uFile = os.path.isfile('backend/users.txt')
+'''uFile = os.path.isfile('backend/users.txt')
 eFile = os.path.isfile('backend/events.txt')
 if uFile:
     pass
@@ -42,7 +42,7 @@ if eFile:
         else:
             members = line[7].split(',')
             eventL.addOldEvent(line[0],line[1],line[2],population,tags,line[5],line[6],members)
-    eventL.set_eIDC(int(lines[0]))
+    eventL.set_eIDC(int(lines[0]))'''
 # listeners
 
 @server.route('/')
@@ -62,7 +62,7 @@ def add_user():
     if not request.json or not 'username' in request.json or not 'password' in request.json:
         return jsonify({'response':400,'message':'missing parameters'})
     if userL.addUser(request.json['username'],request.json['password']):
-        userL.writeUserInfo()
+        #userL.writeUserInfo()
         return jsonify({'response':200,'message':'OK','username':request.json['username']})
     return jsonify({'response':400,'message':'username exists'})
 
@@ -80,12 +80,12 @@ def update(username):
         return jsonify({'response':400,'message':'missing parameters'})
     if 'newPW' in request.json:
         if userL.updatePassword(username,request.json['password'],request.json['newPW']):
-            userL.writeUserInfo()
+            #userL.writeUserInfo()
             return jsonify({'response':200,'message':'OK'})
         return jsonify({'response':400,'message':'permission denied'})
     if 'newUser' in request.json:
         if userL.updateUsername(username,request.json['newUser'],request.json['password']):
-            userL.writeUserInfo()
+            #userL.writeUserInfo()
             return jsonify({'response':200,'message':'OK'})
         return jsonify({'response':400,'message':'permission denied'})
 
@@ -94,7 +94,7 @@ def remove_user(username):
     if not request.json or not 'password' in request.json:
         return jsonify({'response':400,'message':'missing parameters'})
     if userL.removeUser(username,request.json['password']):
-        userL.writeUserInfo()
+        #userL.writeUserInfo()
         return jsonify({'response':200,'message':'OK'})
     return jsonify({'response':400,'message':'permission denied'})
 
@@ -121,18 +121,16 @@ def create_event():
     # wrong response, return error code 400
     if not request.json or not 'name' in request.json or not 'location' in request.json or not 'population' in request.json or not 'tags' in request.json or not 'description' in request.json or not 'ownerName' in request.json:
         response = jsonify({'response':400,'message':'missing parameters'})
-        response.headers.add('Access-Control-Allow-Origin', '*')
         return response
     if not userL.checkUser(request.json['ownerName']):
         response = jsonify({'response':400,'message':'owner does not exist'})
-        response.headers.add('Access-Control-Allow-Origin', '*')
         return response
     returnD = dict()
     returnD['response']=200
     returnD['message']='OK'
     eID = eventL.addEvent(request.json['name'],request.json['location'],request.json['population'],request.json['tags'],request.json['ownerName'],request.json['description'])
     returnD['eventID'] = eID
-    eventL.writeEventInfo()
+    #eventL.writeEventInfo()
     response =  jsonify(returnD)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
@@ -174,7 +172,7 @@ def update_event(eventID):
             returnD['response']= 400
             returnD['message']='didn\'t update'
         else:
-            eventL.writeEventInfo()
+            #eventL.writeEventInfo()
             returnD['response']=200
             returnD['message']='OK'
         returnD['eventID']=eventID
@@ -190,7 +188,7 @@ def remove_event(eventID):
         return jsonify({'response':400,'message':'missing parameters'})
     if eventL.checkOwner(eventID,request.json['username']) and userL.checkUserPW(eventL.getOwner(eventID),request.json['password']):
         eventL.deleteEvent(eventID)
-        eventL.writeEventInfo()
+        #eventL.writeEventInfo()
         return jsonify({'response':200,'message':'OK'})
     else:
         return jsonify({'response':400,'message':'Permission denied'})
